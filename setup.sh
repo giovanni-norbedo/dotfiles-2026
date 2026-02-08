@@ -71,8 +71,7 @@ sudo pacman -S --noconfirm --needed \
     brightnessctl \
     playerctl \
     acpi \
-    htop \
-    neofetch
+    htop 
 
 log "INSTALLING AUR HELPER ($AUR_HELPER)"
 if ! command -v $AUR_HELPER &> /dev/null; then
