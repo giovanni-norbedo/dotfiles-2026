@@ -1,0 +1,76 @@
+{
+    "app_config": {
+        "audio_config": {
+            "audio": "pipewire"
+        },
+        "bluetooth_config": {
+            "enabled": true
+        },
+        "power_management_config": {
+            "power_management": "power-profiles-daemon"
+        },
+        "print_service_config": {
+            "enabled": true
+        }
+    },
+    "archinstall-language": "English",
+    "auth_config": {},
+    "bootloader_config": {
+        "bootloader": "Grub",
+        "removable": false,
+        "uki": false
+    },
+    "custom_commands": [],
+    "hostname": "arch",
+    "kernels": [
+        "linux",
+        "linux-lts"
+    ],
+    "locale_config": {
+        "kb_layout": "it",
+        "sys_enc": "UTF-8",
+        "sys_lang": "en_US.UTF-8"
+    },
+    "mirror_config": {
+        "custom_repositories": [],
+        "custom_servers": [],
+        "mirror_regions": {
+            "Italy": [
+                "http://it.mirrors.cicku.me/archlinux/$repo/os/$arch",
+                "https://it.mirrors.cicku.me/archlinux/$repo/os/$arch",
+                "http://archlinux.mirror.garr.it/archlinux/$repo/os/$arch",
+                "http://archlinux.mirror.server24.net/$repo/os/$arch",
+                "https://archlinux.mirror.server24.net/$repo/os/$arch",
+                "https://arch.mirror.hyperbit.it/$repo/os/$arch"
+            ]
+        },
+        "optional_repositories": []
+    },
+    "network_config": {
+        "type": "nm"
+    },
+    "ntp": true,
+    "packages": [],
+    "parallel_downloads": 0,
+    "profile_config": {
+        "gfx_driver": "Nvidia (proprietary)",
+        "greeter": "ly",
+        "profile": {
+            "custom_settings": {
+                "Xmonad": {}
+            },
+            "details": [
+                "Xmonad"
+            ],
+            "main": "Desktop"
+        }
+    },
+    "script": null,
+    "services": [],
+    "swap": {
+        "algorithm": "zstd",
+        "enabled": true
+    },
+    "timezone": "Europe/Rome",
+    "version": "3.0.15"
+}
