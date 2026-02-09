@@ -1,15 +1,16 @@
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+eval "$(starship init zsh)"
+
+alias ls='ls --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias cat='bat --style=plain'
+
+if command -v fastfetch &> /dev/null; then
+    fastfetch
 fi
 
-export ZSH="$ZDOTDIR/ohmyzsh"
-
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
-plugins=(git zsh-autosuggestions)
-
-source $ZSH/oh-my-zsh.sh
-
-[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
-
-clear && afetch
+## install fetch
