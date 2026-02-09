@@ -52,6 +52,7 @@ myStartupHook :: X ()
 myStartupHook = do
   spawnOnce "picom &"
   spawnOnce "nm-applet &"
+  spawnOnce "feh --bg-fill /home/venpy/.wp/dracula_skull.png &"
   spawn "/home/venpy/.config/polybar/launch.sh"
 
 -- Keybindings
