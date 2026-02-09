@@ -56,6 +56,7 @@ sudo pacman -S --noconfirm --needed \
     man-db \
     ttf-jetbrains-mono-nerd \
     ttf-font-awesome \
+    ttf-fantasque-nerd \
     networkmanager \
     bluez \
     bluez-utils \
@@ -71,7 +72,10 @@ sudo pacman -S --noconfirm --needed \
     brightnessctl \
     playerctl \
     acpi \
-    htop 
+    htop \
+    zsh \
+    zsh-autosuggestions \
+    yazi
 
 log "INSTALLING AUR HELPER ($AUR_HELPER)"
 if ! command -v $AUR_HELPER &> /dev/null; then
@@ -143,10 +147,6 @@ link_config() {
     ln -s "$src" "$dest"
 }
 
-if [ -f "$DOTFILES_DIR/polybar/launch.sh" ]; then
-    chmod +x "$DOTFILES_DIR/polybar/launch.sh"
-fi
-
 log ".CONFIG DIR"
 
 mkdir -p "$HOME/.config"
@@ -159,6 +159,10 @@ for config_dir in "$DOTFILES_DIR/config"/*; do
     link_config "config/$name" "$HOME/.config/$name"
 done
 
+
+if [ -f "$DOTFILES_DIR/polybar/launch.sh" ]; then
+    chmod +x "$DOTFILES_DIR/polybar/launch.sh"
+fi
 
 # link_config "bash/bashrc"         "$HOME/.bashrc"
 # link_config "xinit/xinitrc"       "$HOME/.xinitrc"
