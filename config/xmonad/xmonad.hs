@@ -55,6 +55,7 @@ myStartupHook = do
     spawnOnce "picom &"                -- Compositor (trasparenze/ombre)
     spawnOnce "nm-applet &"            -- Icona network manager
     spawnOnce "nitrogen --restore &"   -- Wallpaper (esempio)
+    spawn "/home/venpy/.config/polybar/launch.sh" -- Polybar
     -- Aggiungi qui altri comandi di avvio
 
 -- Keybindings

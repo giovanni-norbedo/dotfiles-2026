@@ -143,6 +143,10 @@ link_config() {
     ln -s "$src" "$dest"
 }
 
+if [ -f "$DOTFILES_DIR/polybar/launch.sh" ]; then
+    chmod +x "$DOTFILES_DIR/polybar/launch.sh"
+fi
+
 log ".CONFIG DIR"
 
 mkdir -p "$HOME/.config"
