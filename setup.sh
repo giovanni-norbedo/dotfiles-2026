@@ -182,5 +182,13 @@ log "# XMONAD CONFIG"
 xmonad --recompile || warn "Failed to recompile xmonad."
 
 
+log "# WALLPAPER"
+if [ -f "$DOTFILES_DIR/dracula_skull.png" ]; then
+    mkdir -p "$HOME/.wp"
+    cp "$DOTFILES_DIR/dracula_skull.png" "$HOME/.wp/dracula_skull.png"
+else
+    warn "Wallpaper not found. Skipping..."
+fi
+
 log "# FINISHED"
 echo "Installation complete. Please reboot."
