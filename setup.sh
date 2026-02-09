@@ -171,6 +171,7 @@ fi
 # link_config "xinit/xinitrc"       "$HOME/.xinitrc"
 # .zshrc, .profile
 
+link_config ".zshrc" "$HOME/.zshrc"
 
 log "XMONAD CONFIG"
 xmonad --recompile || warn "Failed to recompile xmonad."
