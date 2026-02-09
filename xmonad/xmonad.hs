@@ -23,7 +23,7 @@ myTerminal      = "kitty"
 myBrowser       = "firefox"
 myEditor        = "codium"
 myLauncher      = "rofi -show drun -drun-match-fields name"
-myModMask       = mod4Mask -- Tasto Super
+myModMask       = mod4Mask -- Super
 
 -- Colors
 myNormColor     = "#f8f8f2"

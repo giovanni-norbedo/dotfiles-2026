@@ -88,7 +88,8 @@ fi
 
 
 log "AUR PACKAGES"
-# todo
+yay -S --noconfirm --needed \
+    vscodium-bin
 
 
 log "GIT SETUP"
