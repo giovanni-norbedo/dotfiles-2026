@@ -89,7 +89,8 @@ fi
 
 log "AUR PACKAGES"
 yay -S --noconfirm --needed \
-    vscodium-bin
+    vscodium-bin \
+    tree
 
 
 log "GIT SETUP"
@@ -117,7 +118,7 @@ link_config() {
     local date_str=$(date +%Y%m%d-%H%M%S)
 
     if [ ! -e "$src" ]; then
-        warn "Source file $src does not exist. Skipping $1."
+        warn "Source $src does not exist. Skipping..."
         return 1
     fi
 
@@ -129,12 +130,12 @@ link_config() {
             log "Skipping $dest, already correctly linked."
             return 0
         else
-            warn "Incorrect link found at $dest. Removing..."
+            warn "Incorrect link at $dest. Removing..."
             rm "$dest"
         fi
     
     elif [ -e "$dest" ]; then
-        warn "File found at $dest. Creating backup: $dest.$date_str.bak"
+        warn "Existing config found at $dest. Backup: $dest.$date_str.bak"
         mv "$dest" "$dest.$date_str.bak"
     fi
 
@@ -142,17 +143,22 @@ link_config() {
     ln -s "$src" "$dest"
 }
 
+log ".CONFIG DIR"
 
-link_config "xmonad/xmonad.hs"    "$HOME/.config/xmonad/xmonad.hs"
+mkdir -p "$HOME/.config"
 
-link_config "polybar/config.ini"  "$HOME/.config/polybar/config.ini"
-link_config "kitty/kitty.conf"    "$HOME/.config/kitty/kitty.conf"
-link_config "rofi/config.rasi"    "$HOME/.config/rofi/config.rasi"
-link_config "dunst/dunstrc"       "$HOME/.config/dunst/dunstrc"
-link_config "picom/picom.conf"    "$HOME/.config/picom/picom.conf"
+for config_dir in "$DOTFILES_DIR/config"/*; do
+    name=$(basename "$config_dir")
+    
+    if [ "$name" == "." ] || [ "$name" == ".." ]; then continue; fi
 
-link_config "bash/bashrc"         "$HOME/.bashrc"
-link_config "xinit/xinitrc"       "$HOME/.xinitrc"
+    link_config "config/$name" "$HOME/.config/$name"
+done
+
+
+# link_config "bash/bashrc"         "$HOME/.bashrc"
+# link_config "xinit/xinitrc"       "$HOME/.xinitrc"
+# .zshrc, .profile
 
 
 log "XMONAD CONFIG"
