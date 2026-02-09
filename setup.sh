@@ -80,7 +80,8 @@ sudo pacman -S --noconfirm --needed \
     yazi \
     bat \
     eza \
-    fzf
+    fzf \
+    zoxide
 
 log "# INSTALLING AUR HELPER ($AUR_HELPER)"
 if ! command -v $AUR_HELPER &> /dev/null; then
@@ -180,24 +181,6 @@ link_config "nanorc" "$HOME/.nanorc"
 log "# XMONAD CONFIG"
 xmonad --recompile || warn "Failed to recompile xmonad."
 
-
-log "# ZSH AUTOSUGGESTIONS"
-if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
-    log "# Installing zsh-autosuggestions..."
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-    log "# zsh-autosuggestions installed."
-else
-    log "# zsh-autosuggestions already installed."
-fi
-
-log "# ZSH SYNTAX HIGHLIGHTING"
-if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]; then
-    log "# Installing zsh-syntax-highlighting..."
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-    log "# zsh-syntax-highlighting installed."
-else
-    log "# zsh-syntax-highlighting already installed."
-fi
 
 log "# FINISHED"
 echo "Installation complete. Please reboot."

@@ -2,7 +2,8 @@
 
 loadkeys it
 
-iwctl --passphrase "PASSWORD" station wlan0 connect "SSID"
+# CHANGE THESE BEFORE RUNNING
+iwctl --passphrase "YOUR_PASSWORD" station wlan0 connect "YOUR_SSID"
 
 curl -O "https://raw.githubusercontent.com/giovanni-norbedo/dotfiles-2026/main/user_configuration.json"
 # curl -L -O norbedo.xyz/config.json

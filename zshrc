@@ -18,6 +18,11 @@ if [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; th
 fi
 
 eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
+
+# FZF integration
+source <(fzf --zsh)
+bindkey '^R' fzf-history-widget
 
 alias ls='eza --icons --group-directories-first'
 alias ll='eza -alF --icons --group-directories-first --git'
