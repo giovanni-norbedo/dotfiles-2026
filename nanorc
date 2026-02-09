@@ -1,0 +1,12 @@
+set autoindent
+set constantshow
+set guidestripe 75
+set indicator
+set magic
+set matchbrackets "(<[{)>]}"
+set mouse
+set nohelp
+set positionlog
+set softwrap
+set tabsize 4
+set tabstospaces

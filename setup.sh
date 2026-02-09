@@ -25,16 +25,16 @@ if [ "$EUID" -eq 0 ]; then
 fi
 
 
-log "UPDATE"
+log "# UPDATE"
 sudo pacman -Syu --noconfirm
 
 
-log "SET it KEYBOARD"
+log "# SET it KEYBOARD"
 sudo loadkeys it
 sudo localectl set-keymap it
 
 
-log "PACKAGES"
+log "# PACKAGES"
 sudo pacman -S --noconfirm --needed \
     git \
     base-devel \
@@ -82,9 +82,9 @@ sudo pacman -S --noconfirm --needed \
     eza \
     fzf
 
-log "INSTALLING AUR HELPER ($AUR_HELPER)"
+log "# INSTALLING AUR HELPER ($AUR_HELPER)"
 if ! command -v $AUR_HELPER &> /dev/null; then
-    log "Installing $AUR_HELPER..."
+    log "# Installing $AUR_HELPER..."
     BUILD_DIR=$(mktemp -d)
     git clone "https://aur.archlinux.org/$AUR_HELPER.git" "$BUILD_DIR"
     pushd "$BUILD_DIR"
@@ -92,33 +92,33 @@ if ! command -v $AUR_HELPER &> /dev/null; then
     popd
     rm -rf "$BUILD_DIR"
 else
-    log "$AUR_HELPER already installed."
+    log "# $AUR_HELPER already installed."
 fi
 
 
-log "AUR PACKAGES"
+log "# AUR PACKAGES"
 yay -S --noconfirm --needed \
     vscodium-bin \
     tree
 
 
-log "GIT SETUP"
+log "# GIT SETUP"
 git config --global user.email "norbedo@proton.me"
 git config --global user.name "Giovanni Norbedo"
 
 
-log "CLONE DOTFILES"
+log "# CLONE DOTFILES"
 if [ ! -d "$DOTFILES_DIR" ]; then
     git clone $REPO_URL $DOTFILES_DIR
 else
-    log "Dotfiles already cloned. Pulling latest changes..."
+    log "# Dotfiles already cloned. Pulling latest changes..."
     cd $DOTFILES_DIR
     git pull
     cd - > /dev/null
 fi
 
 
-log "LINK CONFIGS"
+log "# LINK CONFIGS"
 
 link_config() {
     local src="$DOTFILES_DIR/$1"
@@ -136,7 +136,7 @@ link_config() {
     if [ -L "$dest" ]; then
         local current_target=$(readlink "$dest")
         if [ "$current_target" == "$src" ]; then
-            log "Skipping $dest, already correctly linked."
+            log "# Skipping $dest, already correctly linked."
             return 0
         else
             warn "Incorrect link at $dest. Removing..."
@@ -148,11 +148,11 @@ link_config() {
         mv "$dest" "$dest.$date_str.bak"
     fi
 
-    log "Linking $src -> $dest"
+    log "# Linking $src -> $dest"
     ln -s "$src" "$dest"
 }
 
-log ".CONFIG DIR"
+log "# .CONFIG DIR"
 
 mkdir -p "$HOME/.config"
 
@@ -173,11 +173,31 @@ fi
 # link_config "xinit/xinitrc"       "$HOME/.xinitrc"
 # .zshrc, .profile
 
-link_config ".zshrc" "$HOME/.zshrc"
+link_config "zshrc" "$HOME/.zshrc"
+link_config "nanorc" "$HOME/.nanorc"
 
-log "XMONAD CONFIG"
+
+log "# XMONAD CONFIG"
 xmonad --recompile || warn "Failed to recompile xmonad."
 
 
-log "FINISHED"
+log "# ZSH AUTOSUGGESTIONS"
+if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
+    log "# Installing zsh-autosuggestions..."
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+    log "# zsh-autosuggestions installed."
+else
+    log "# zsh-autosuggestions already installed."
+fi
+
+log "# ZSH SYNTAX HIGHLIGHTING"
+if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]; then
+    log "# Installing zsh-syntax-highlighting..."
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    log "# zsh-syntax-highlighting installed."
+else
+    log "# zsh-syntax-highlighting already installed."
+fi
+
+log "# FINISHED"
 echo "Installation complete. Please reboot."
