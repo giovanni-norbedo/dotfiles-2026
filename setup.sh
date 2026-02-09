@@ -158,13 +158,5 @@ log "XMONAD CONFIG"
 xmonad --recompile || warn "Failed to recompile xmonad."
 
 
-log "ENABLE SERVICES"
-sudo systemctl enable --now ly.service
-sudo systemctl enable --now NetworkManager
-sudo systemctl enable --now bluetooth
-
-
 log "FINISHED"
 echo "Installation complete. Please reboot."
-
-
