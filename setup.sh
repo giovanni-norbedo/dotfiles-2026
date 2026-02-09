@@ -78,7 +78,9 @@ sudo pacman -S --noconfirm --needed \
     zsh-syntax-highlighting \
     starship \
     yazi \
-    bat
+    bat \
+    eza \
+    fzf
 
 log "INSTALLING AUR HELPER ($AUR_HELPER)"
 if ! command -v $AUR_HELPER &> /dev/null; then
